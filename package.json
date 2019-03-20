@@ -1,0 +1,48 @@
+{
+  "name": "flats-grabber",
+  "version": "1.0.0",
+  "description": "Node flats scraper app based on cheerio and mongo db",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon --exec babel-node server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/milanmilosev/flats-grabber.git"
+  },
+  "keywords": [
+    "node",
+    "app",
+    "flats",
+    "finder",
+    "search",
+    "immobilienscout24"
+  ],
+  "author": "Milan Milosev",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/milanmilosev/flats-grabber/issues"
+  },
+  "homepage": "https://github.com/milanmilosev/flats-grabber#readme",
+  "dependencies": {
+    "cheerio": "^1.0.0-rc.2",
+    "express": "^4.16.4",
+    "express-session": "^1.15.6",
+    "mongoose": "^5.4.19",
+    "mongoose-unique-validator": "^2.0.2",
+    "nodemailer": "^5.1.1",
+    "puppeteer": "^1.13.0",
+    "request": "^2.88.0",
+    "request-promise": "^4.2.4"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.3.4",
+    "@babel/node": "^7.2.2",
+    "@babel/preset-env": "^7.3.4",
+    "@types/node": "^11.11.3",
+    "babel-preset-env": "^1.7.0",
+    "babel-register": "^6.26.0",
+    "nodemon": "^1.18.10"
+  }
+}
