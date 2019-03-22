@@ -17,6 +17,7 @@ const itemsPerPage = 10;
 // ---------------------
 
 
+// promise refactoring
 let app = () => {
   rp(url)
     .then(function(html) {
