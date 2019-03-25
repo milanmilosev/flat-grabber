@@ -16,7 +16,7 @@ const flatParse = (url) => {
       }
     })
     .catch(function(err) {
-      //handle error
+      console.log(`parsing error inside flatParse(model): ${err}`);
     });
 };
 

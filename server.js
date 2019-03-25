@@ -1,4 +1,4 @@
-require('dotenv').config({ path: 'process.env' })
+require('dotenv').config({ path: 'process-dev.env' })
 import express from 'express';
 const app = express();
 const database = require('./db/getDb');
