@@ -1,6 +1,6 @@
+require('dotenv').config({ path: 'process-dev.env' })
 import express from 'express';
 const app = express();
-require('dotenv').config({ path: 'process.env' })
 const database = require('./db/getDb');
 const getFlats = require('./app');
 

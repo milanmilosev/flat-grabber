@@ -9,7 +9,7 @@ const sendEmail = require('./lib/sendEmail')
 // full immobilienscout24 link with search queries
 const url = `${process.env.IMMO_SEARCH_LINK}`;
 //
-// locate and extract the link (href) with the help of css selector
+// extract link (href) with the help of css selector
 const link = '.result-list-entry__data-container .result-list-entry__brand-title-container';
 //
 // number of search results (flats) per page
@@ -17,6 +17,7 @@ const itemsPerPage = 10;
 // ---------------------
 
 
+// promise refactoring
 let app = () => {
   rp(url)
     .then(function(html) {
@@ -34,34 +35,31 @@ let app = () => {
       );
     })
     .then(function(flats) {
-      console.log('dataparse done!');
-      console.log('searching for new flats...');    
+      console.log('searching for new flats');
 
-      const fetchData = () => {
-        return new Promise(function (resolve, reject) {
-          resolve();
-        });
-      };
-
-      for (let flat in flats) {
-        fetchData(flats[flat]).then(function () {
+      const checkDB = () => {
+        for (let flat in flats) {
           // Check if result exist in DB
-          FlatSchema.find({link: flats[flat].link}, function(a, b) {
-            if(!b.length) {
-              console.log(`new flats: ${flats[flat].name}`)
+          FlatSchema.find({link: flats[flat].link}, function(req, res) {
+            if(!res.length) {
               // store in DB
+              console.log(`new flats: ${flats[flat].name}`)
               new FlatSchema(flats[flat])
-                .save(function (err, product) {
-                  if(product) {console.log('data saved')}
+                .save(function (err, rel) {
+                  if(rel) {console.log('data saved')}
                   if(err) {console.log(err)}
-              })
+              });
+              // send email
               let thisFlat = flats[flat];
-              
               sendEmail(thisFlat);
             }
+            // parsing done
+            flat == (flats.length - 1) && res ? console.log('parsing done') : null;
           });
-        });
+        }
       }
+
+      checkDB();
     })
     .catch(function(err) {
       //handle error
